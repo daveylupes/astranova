@@ -5,27 +5,29 @@ import datetime as dt
 STRATEGIES_URL = "https://product-gateway.astrabit.io/product/strategies"
 PERFORMANCE_URL = "https://strategy-performance-gateway.astrabit.io/strategy-performance/calculate"
 
-def get_strategies():
-    response = requests.get(STRATEGIES_URL)
-    response.raise_for_status
-    try:
-        data = response.json()
-        strategies = {el['name']:el for el in data['results']}
-    except:
-        print(data)
-    return strategies
-
 def get_cached_strategies():
     with open('/app/data/strategy_list.json') as f:
         data = json.load(f)
     strategies = {el['name']:el for el in data['results']}
     return strategies
 
+def get_strategies():
+    response = requests.get(STRATEGIES_URL)
+    response.raise_for_status
+    try:
+        data = response.json()
+        strategies = {el['name']:el for el in data['results']}
+    except Exception as ex:
+        print(ex)
+        strategies = get_cached_strategies()
+    return strategies
+
 strategies = get_strategies()
 
-def list_strategies(request=False):
-    if request:
-        strategies = get_strategies()
+def list_strategies():
+# def list_strategies(request=False):
+#     if request:
+#         strategies = get_strategies()
     return list(strategies.keys())
 
 def get_strategy_detail(strategy_id: str, request=False):
@@ -49,6 +51,6 @@ def get_strategy_performance(strategy_id: str, amount: float = 1000, leverage: f
         data = resp.json()
         points = data['points']
         performance = {dt.datetime.fromtimestamp(point['timestamp']/1000, dt.UTC):point['value'] for point in points}
-    except:
-        print(data)
+    except Exception as ex:
+        print(ex)
     return performance

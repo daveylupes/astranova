@@ -11,7 +11,13 @@ services:
       - ./site:/srv
       - caddy_data:/data
       - caddy_config:/config
+    networks:
+      - backend
 
 volumes:
   caddy_data:
   caddy_config:
+
+networks:
+  backend:
+    external: true

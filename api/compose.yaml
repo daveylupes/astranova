@@ -1,11 +1,14 @@
 services:
-  web:
+  api:
     # Build the image from the Dockerfile in the current directory
     build: .
 
     # Host the FastAPI application on port 8000
     ports:
       - "8000:8000"
+
+    networks:
+      - backend
 
     develop:
       # Create a `watch` configuration to update the appl
@@ -23,3 +26,7 @@ services:
         # Rebuild the image on changes to the `pyproject.toml`
         - action: rebuild
           path: ./pyproject.toml
+
+networks:
+  backend:
+    external: true

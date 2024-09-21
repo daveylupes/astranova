@@ -1,0 +1,14 @@
+astranova.snth.fi {
+	encode gzip
+
+	handle /api/* {
+		# reverse_proxy localhost:8000
+		reverse_proxy astranova.snth.fi:8000
+	}
+
+	handle {
+		root * /srv
+		try_files {path} /index.html
+		file_server
+	}
+}

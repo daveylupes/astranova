@@ -4,8 +4,8 @@ services:
     build: .
 
     # Host the FastAPI application on port 8000
-    ports:
-      - "8000:8000"
+    # ports:
+    #   - "8000:8000"
 
     networks:
       - backend

@@ -21,9 +21,11 @@ fi
 
 docker run \
   --rm \
+  --name api \
   --volume .:/app \
   --volume /app/.venv \
   --publish 8000:8000 \
+  --network=backend \
   $INTERACTIVE \
   $(docker build -q .) \
   "$@"

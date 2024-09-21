@@ -1,0 +1,25 @@
+[project]
+name = "astranova-api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.115.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+hello = "astranova-api:hello"
+
+[tool.uv]
+dev-dependencies = [
+    "ruff>=0.6.2",
+    "fastapi-cli>=0.0.5",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/astranova_api"]

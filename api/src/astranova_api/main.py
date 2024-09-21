@@ -1,16 +1,7 @@
 from fastapi import FastAPI
-import json
+from astrabit import strategies
 
-with open('/app/data/strategy_list.json') as f:
-    data = json.load(f)
-strategies = {el['name']:el for el in data['results']}
-
-app = FastAPI()
-
-# FIXME: remove
-@app.get("/api/list")
-async def list_():
-    return list(strategies.keys())
+app = FastAPI(docs_url="/api/docs", openapi_url="/api/openapi.json", redoc_url=None)
 
 @app.get("/api/strategies")
 async def list_strategies():

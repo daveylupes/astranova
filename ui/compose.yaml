@@ -7,11 +7,7 @@ services:
     # volumes:
     #   - .:/var/www
     # working_dir: /var/www
-    # entrypoint: ["npm", "start", "-v"]
-    # entrypoint: ["/bin/sh"]
-    # command: "npm run dev"
     command: "npm start"
-    # command: "HOST='0.0.0.0' npm run server -v"
     networks:
       - backend
 

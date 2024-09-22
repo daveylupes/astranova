@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { Typography, Button, CircularProgress, Box } from '@mui/material';
-import StrategyCard from '../StrategyCard';
-import PriceCard from '../PriceCard';
-import BacktestCard from '../BacktestCard';
+import StrategyCard from '../StrategyCard'; 
+import PriceCard from '../PriceCard'; 
+import BacktestCard from '../BacktestCard'; 
 import { fetchStrategies, fetchStrategyDetails, fetchCost, fetchMaxLeverage, fetchTradePair, fetchPerformance } from '../../services/Api';
+
 
 function Home() {
   const [strategies, setStrategies] = useState([]);
@@ -31,20 +32,22 @@ function Home() {
   const handleStrategySelect = async (strategyId) => {
     setLoading(true);
     try {
-      const data = await fetchStrategyDetails(strategyId);
-      const cost = await fetchCost(strategyId);
-      const maxLeverage = await fetchMaxLeverage(strategyId);
-      const tradePair = await fetchTradePair(strategyId);
-      const performance = await fetchPerformance(strategyId);
-
+      const [data, cost, maxLeverage, tradePair, performance] = await Promise.all([
+        fetchStrategyDetails(strategyId),
+        fetchCost(strategyId),
+        fetchMaxLeverage(strategyId),
+        fetchTradePair(strategyId),
+        fetchPerformance(strategyId)
+      ]);
+  
       const combinedData = {
         ...data,
         cost,
         maxLeverage,
         tradePair,
-        performance,
+        performance
       };
-
+  
       setSelectedStrategy(combinedData);
     } catch (error) {
       console.error('Error fetching strategy details:', error);
@@ -52,7 +55,7 @@ function Home() {
       setLoading(false);
     }
   };
-
+  
   if (loading) return <CircularProgress />;
 
   return (
@@ -111,10 +114,10 @@ function Home() {
           </Box>
           <Box sx={{ m: 2 }}>
             <Typography variant="h6">Additional Information</Typography>
-            <Typography><strong>Cost:</strong> {selectedStrategy.cost}</Typography>
-            <Typography><strong>Max Leverage:</strong> {selectedStrategy.maxLeverage}</Typography>
-            <Typography><strong>Trade Pair:</strong> {selectedStrategy.tradePair.name}</Typography>
-            <Typography><strong>Performance:</strong> {JSON.stringify(selectedStrategy.performance)}</Typography>
+            <Typography><strong>Cost:</strong> {selectedStrategy.cost ? selectedStrategy.cost : 'N/A'}</Typography>
+            <Typography><strong>Max Leverage:</strong> {selectedStrategy.maxLeverage ? selectedStrategy.maxLeverage : 'N/A'}</Typography>
+            <Typography><strong>Trade Pair:</strong> {selectedStrategy.tradePair ? selectedStrategy.tradePair.name : 'N/A'}</Typography>
+            <Typography><strong>Performance:</strong> {selectedStrategy.performance ? JSON.stringify(selectedStrategy.performance) : 'N/A'}</Typography>
           </Box>
         </Box>
       )}

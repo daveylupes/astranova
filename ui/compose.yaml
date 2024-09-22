@@ -1,0 +1,16 @@
+services:
+  ui:
+    build: .
+    ports:
+      - "3000:3000"
+    restart: always
+    # volumes:
+    #   - .:/var/www
+    # working_dir: /var/www
+    command: "npm start"
+    networks:
+      - backend
+
+networks:
+  backend:
+    external: true

@@ -1,6 +1,6 @@
 # Step 1: Use an official Node.js image to build the app
-# FROM node:19-bullseye
-FROM node:16
+FROM node:19-bullseye
+# FROM node:16
 
 EXPOSE 3000
 

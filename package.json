@@ -1,4 +1,5 @@
 {
+  "homepage": "http://rackzar.snth.co.za:3000",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,

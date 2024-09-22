@@ -1,11 +1,11 @@
 // src/components/Home.js
 
 import React, { useEffect, useState } from 'react';
-import { Typography, Button, CircularProgress } from '@mui/material';
+import { Typography, Button, CircularProgress, Box } from '@mui/material';
 import StrategyCard from '../StrategyCard';
 import PriceCard from '../PriceCard';
 import BacktestCard from '../BacktestCard';
-import { fetchStrategies, fetchStrategyDetails } from '../../services/Api'
+import { fetchStrategies, fetchStrategyDetails, fetchCost, fetchMaxLeverage, fetchTradePair, fetchPerformance } from '../../services/Api';
 
 function Home() {
   const [strategies, setStrategies] = useState([]);
@@ -32,7 +32,21 @@ function Home() {
     setLoading(true);
     try {
       const data = await fetchStrategyDetails(strategyId);
-      setSelectedStrategy(data);
+      const cost = await fetchCost(strategyId);
+      const maxLeverage = await fetchMaxLeverage(strategyId);
+      const tradePair = await fetchTradePair(strategyId);
+      const performance = await fetchPerformance(strategyId);
+
+      // Combine all data into a single object
+      const combinedData = {
+        ...data,
+        cost,
+        maxLeverage,
+        tradePair,
+        performance,
+      };
+
+      setSelectedStrategy(combinedData);
     } catch (error) {
       console.error('Error fetching strategy details:', error);
     } finally {
@@ -47,34 +61,42 @@ function Home() {
       <Typography variant="h4" component="h1" gutterBottom>
         Astro Nova Dashboard
       </Typography>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '16px' }}>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
         {strategies.length > 0 ? (
           strategies.map(strategy => (
-            <Button
-              key={strategy.publicId}
-              variant="contained"
-              onClick={() => handleStrategySelect(strategy.publicId)}
-              style={{ flex: '1 1 calc(50% - 16px)', minWidth: '200px' }}
-            >
-              {strategy.name}
-            </Button>
+            <Box key={strategy.publicId} sx={{ m: 2 }}>
+              <Button
+                variant="contained"
+                onClick={() => handleStrategySelect(strategy.publicId)}
+                style={{ width: '100%' }}
+              >
+                {strategy.name}
+              </Button>
+            </Box>
           ))
         ) : (
           <Typography>No strategies available</Typography>
         )}
-      </div>
+      </Box>
       {selectedStrategy && (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
-          <div style={{ flex: '1 1 50%', minWidth: '300px' }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <Box sx={{ m: 2 }}>
             <StrategyCard strategy={selectedStrategy} />
-          </div>
-          <div style={{ flex: '1 1 50%', minWidth: '300px' }}>
+          </Box>
+          <Box sx={{ m: 2 }}>
             <PriceCard prices={selectedStrategy.prices} />
-          </div>
-          <div style={{ flex: '1 1 100%' }}>
+          </Box>
+          <Box sx={{ m: 2 }}>
             <BacktestCard backtests={selectedStrategy.strategyBackTests} />
-          </div>
-        </div>
+          </Box>
+          <Box sx={{ m: 2 }}>
+            <Typography variant="h6">Additional Information</Typography>
+            <Typography>Cost: {selectedStrategy.cost}</Typography>
+            <Typography>Max Leverage: {selectedStrategy.maxLeverage}</Typography>
+            <Typography>Trade Pair: {selectedStrategy.tradePair.name}</Typography>
+            <Typography>Performance: {JSON.stringify(selectedStrategy.performance)}</Typography>
+          </Box>
+        </Box>
       )}
     </div>
   );

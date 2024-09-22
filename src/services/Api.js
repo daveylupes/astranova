@@ -1,27 +1,49 @@
-// src/services/Api.js
+const BASE_URL = 'https://astranova.snth.fi/api';
 
-const API_BASE_URL = 'https://astranova.snth.fi/api';
-
-export const fetchStrategies = async () => {
-  const response = await fetch(`${API_BASE_URL}/strategies`);
+export async function fetchStrategies() {
+  const response = await fetch(`${BASE_URL}/strategies`);
   if (!response.ok) {
     throw new Error('Failed to fetch strategies');
   }
-  return await response.json();
-};
+  return response.json();
+}
 
-export const fetchStrategyDetails = async (strategyId) => {
-  const response = await fetch(`${API_BASE_URL}/strategy/${strategyId}`);
+export async function fetchStrategyDetails(strategy_id) {
+  const response = await fetch(`${BASE_URL}/strategy/${strategy_id}`);
   if (!response.ok) {
-    throw new Error(`Failed to fetch details for strategy ${strategyId}`);
+    throw new Error('Failed to fetch strategy details');
   }
-  return await response.json();
-};
+  return response.json();
+}
 
-export const fetchStrategyPerformance = async (strategyId) => {
-  const response = await fetch(`${API_BASE_URL}/performance/${strategyId}`);
+export async function fetchCost(strategy_id) {
+  const response = await fetch(`${BASE_URL}/cost/${strategy_id}`);
   if (!response.ok) {
-    throw new Error(`Failed to fetch performance for strategy ${strategyId}`);
+    throw new Error('Failed to fetch cost data');
   }
-  return await response.json();
-};
+  return response.json();
+}
+
+export async function fetchMaxLeverage(strategy_id) {
+  const response = await fetch(`${BASE_URL}/max_leverage/${strategy_id}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch max leverage data');
+  }
+  return response.json();
+}
+
+export async function fetchTradePair(strategy_id) {
+  const response = await fetch(`${BASE_URL}/trade_pair/${strategy_id}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch trade pair data');
+  }
+  return response.json();
+}
+
+export async function fetchPerformance(strategy_id) {
+  const response = await fetch(`${BASE_URL}/performance/${strategy_id}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch performance data');
+  }
+  return response.json();
+}

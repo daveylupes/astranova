@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Container, CircularProgress } from '@mui/material';
+import { Container } from '@mui/material';
+import Footer from './components/Footer';
 
 // Import components
 import Navbar from './components/Navbar';
@@ -18,6 +19,7 @@ function App() {
           {/* Add more routes as needed */}
         </Routes>
       </Container>
+      <Footer /> {/* Added Footer component here */}
     </Router>
   );
 }

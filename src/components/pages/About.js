@@ -2,12 +2,12 @@ import React from 'react';
 import { Typography, Container, Box } from '@mui/material';
 import './../../App.css';
 
-function About() {
+function Home() {
   return (
     <Container>
       <Box sx={{ marginBottom: 4 }}>
         <Typography variant="h4" component="h1" gutterBottom>
-          About Astro Nova
+          Welcome to Astro Nova
         </Typography>
         <Typography variant="body1" paragraph>
           Astro Nova is a cutting-edge platform designed to simplify and enhance trading strategies for cryptocurrency enthusiasts. Our mission is to empower traders with the tools and insights they need to make informed decisions in the ever-evolving digital asset landscape.
@@ -71,4 +71,4 @@ function About() {
   );
 }
 
-export default About;
+export default Home;

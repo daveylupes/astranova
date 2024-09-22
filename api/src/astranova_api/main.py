@@ -28,6 +28,12 @@ async def get_strategy_max_leverage(strategy_id: str):
     detail = astra.get_strategy_detail(strategy_id)
     return detail['strategy']['maxLeverage']
 
+@app.get("/api/trade_pair/{strategy_id}")
+async def get_strategy_max_leverage(strategy_id: str):
+    detail = astra.get_strategy_detail(strategy_id)
+    pair = detail['strategy']['tradePair']
+    return {'symbol':pair['name'], 'base':pair['baseAsset']['udfName'], 'quote':pair['tradedAsset']['udfName']}
+
 @app.get("/api/performance/{strategy_id}")
 async def get_strategy_performance(strategy_id: str):
     return astra.get_strategy_performance(strategy_id)

@@ -22,8 +22,11 @@ FROM nginx:stable-alpine
 # Step 8: Copy the build output from the previous step to the NGINX html directory
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Step 9: Expose port 3000 to make the app accessible on this port
+# Step 9: Copy the NGINX configuration file
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Step 10: Expose port 3000 to make the app accessible on this port
 EXPOSE 3000
 
-# Step 10: Start NGINX
+# Step 11: Start NGINX
 CMD ["nginx", "-g", "daemon off;"]

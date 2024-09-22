@@ -37,7 +37,6 @@ function Home() {
       const tradePair = await fetchTradePair(strategyId);
       const performance = await fetchPerformance(strategyId);
 
-      // Combine all data into a single object
       const combinedData = {
         ...data,
         cost,
@@ -57,11 +56,31 @@ function Home() {
   if (loading) return <CircularProgress />;
 
   return (
-    <div>
+    <Box sx={{ padding: 4 }}>
       <Typography variant="h4" component="h1" gutterBottom>
-        Astro Nova Dashboard
+        Welcome to Astro Nova
       </Typography>
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+      <Typography variant="body1" paragraph>
+        At Astro Nova, we empower cryptocurrency enthusiasts with innovative trading strategies and actionable insights. Our platform enables you to navigate the dynamic world of digital assets with confidence.
+      </Typography>
+
+      <Typography variant="h5" component="h2" gutterBottom>
+        Why Choose Astro Nova?
+      </Typography>
+      <Typography variant="body1" paragraph>
+        - <strong>User-Friendly Interface:</strong> An intuitive design that makes trading accessible for both beginners and experts.
+      </Typography>
+      <Typography variant="body1" paragraph>
+        - <strong>Diverse Trading Strategies:</strong> A wide array of strategies tailored to various market conditions, maximizing your trading potential.
+      </Typography>
+      <Typography variant="body1" paragraph>
+        - <strong>Real-Time Performance Analytics:</strong> Track your strategies with live data to make informed adjustments on the fly.
+      </Typography>
+
+      <Typography variant="h5" component="h2" gutterBottom>
+        Explore Our Latest Trading Strategies
+      </Typography>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', mb: 4 }}>
         {strategies.length > 0 ? (
           strategies.map(strategy => (
             <Box key={strategy.publicId} sx={{ m: 2 }}>
@@ -75,11 +94,12 @@ function Home() {
             </Box>
           ))
         ) : (
-          <Typography>No strategies available</Typography>
+          <Typography>No strategies available at this time.</Typography>
         )}
       </Box>
+
       {selectedStrategy && (
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', mt: 4 }}>
           <Box sx={{ m: 2 }}>
             <StrategyCard strategy={selectedStrategy} />
           </Box>
@@ -91,14 +111,14 @@ function Home() {
           </Box>
           <Box sx={{ m: 2 }}>
             <Typography variant="h6">Additional Information</Typography>
-            <Typography>Cost: {selectedStrategy.cost}</Typography>
-            <Typography>Max Leverage: {selectedStrategy.maxLeverage}</Typography>
-            <Typography>Trade Pair: {selectedStrategy.tradePair.name}</Typography>
-            <Typography>Performance: {JSON.stringify(selectedStrategy.performance)}</Typography>
+            <Typography><strong>Cost:</strong> {selectedStrategy.cost}</Typography>
+            <Typography><strong>Max Leverage:</strong> {selectedStrategy.maxLeverage}</Typography>
+            <Typography><strong>Trade Pair:</strong> {selectedStrategy.tradePair.name}</Typography>
+            <Typography><strong>Performance:</strong> {JSON.stringify(selectedStrategy.performance)}</Typography>
           </Box>
         </Box>
       )}
-    </div>
+    </Box>
   );
 }
 

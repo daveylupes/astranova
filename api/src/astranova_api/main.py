@@ -18,6 +18,11 @@ async def list_strategies():
 async def get_strategy_detail(strategy_id: str):
     return astra.get_strategy_detail(strategy_id)
 
+@app.get("/api/cost/{strategy_id}")
+async def get_strategy_cost(strategy_id: str):
+    detail = astra.get_strategy_detail(strategy_id)
+    return detail['prices'][0]['price']
+
 @app.get("/api/performance/{strategy_id}")
 async def get_strategy_performance(strategy_id: str):
     return astra.get_strategy_performance(strategy_id)

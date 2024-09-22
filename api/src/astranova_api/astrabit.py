@@ -30,9 +30,10 @@ def list_strategies():
 #         strategies = get_strategies()
     return list(strategies.keys())
 
-def get_strategy_detail(strategy_id: str, request=False):
-    if request:
-        strategies = get_strategies()
+def get_strategy_detail(strategy_id: str):
+# def get_strategy_detail(strategy_id: str, request=False):
+#     if request:
+#         strategies = get_strategies()
     return strategies[strategy_id]
 
 def get_strategy_performance(strategy_id: str, amount: float = 1000, leverage: float = 1, end_date: str = '', start_date: str = '',

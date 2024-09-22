@@ -1,6 +1,6 @@
 # Step 1: Use an official Node.js image to build the app
-FROM node:19-bullseye
-# FROM node:16
+# FROM node:19-bullseye
+FROM node:16
 
 EXPOSE 3000
 
@@ -12,6 +12,9 @@ COPY package*.json ./
 
 # Step 4: Install dependencies
 RUN npm install
+
+# Check Node and NPM versions
+RUN node -v && npm -v
 
 # Step 5: Copy the rest of the app files
 COPY . .

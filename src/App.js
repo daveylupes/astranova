@@ -1,21 +1,24 @@
-import { ColorModeContext, useMode } from "./theme";
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { default as Topbar } from './scenes/global/Topbar';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Container, CircularProgress } from '@mui/material';
+
+// Import components
+import Navbar from './components/Navbar';
+import Home from './components/pages/Home';
+import About from './components/pages/About';
 
 function App() {
-  const { theme, colorMode } = useMode();
-
   return (
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div className="app">
-          <main className="content">
-            <Topbar />
-          </main>
-        </div>
-      </ThemeProvider>
-    </ColorModeContext.Provider>
+    <Router>
+      <Navbar />
+      <Container>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          {/* Add more routes as needed */}
+        </Routes>
+      </Container>
+    </Router>
   );
 }
 

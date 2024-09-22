@@ -1,0 +1,19 @@
+services:
+  ui:
+    build: .
+    ports:
+      - "3000:3000"
+    restart: always
+    # volumes:
+    #   - .:/var/www
+    # working_dir: /var/www
+    # entrypoint: ["npm", "start", "-v"]
+    # entrypoint: ["/bin/sh"]
+    command: "npm start -v"
+    # command: "HOST='0.0.0.0' npm run server -v"
+    networks:
+      - backend
+
+networks:
+  backend:
+    external: true

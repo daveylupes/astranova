@@ -5,9 +5,12 @@ astranova.snth.fi {
 		reverse_proxy api:8000
 	}
 
+	handle /ui/* {
+    uri strip_prefix /ui
+		reverse_proxy ui:3000
+	}
+
 	handle {
-		root * /srv
-		try_files {path} /index.html
-		file_server
+		reverse_proxy ui:3000
 	}
 }

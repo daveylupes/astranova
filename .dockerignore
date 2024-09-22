@@ -1,5 +1,6 @@
 # Ignore node_modules to avoid copying unnecessary dependencies
 node_modules
+ui/node_modules
 
 # Ignore build files since we'll generate them in the Docker container
 build

@@ -4,7 +4,7 @@ import React from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
 
 function PriceCard({ prices }) {
-  if (!prices || prices.length === 0) return null;
+  if (!prices || prices.length === 0) return <Typography>No price information available</Typography>;
 
   return (
     <Card>

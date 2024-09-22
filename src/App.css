@@ -1,0 +1,53 @@
+/* Navbar.css */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #CFFE7F; /* Navbar background */
+}
+
+.navbar-logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.navbar-title {
+  flex-grow: 1;
+  font-size: 1.5rem; /* Adjust font size as needed */
+  color: rgb(197, 21, 21); /* Text color */
+}
+
+.navbar-button {
+  color: rgb(197, 21, 21); /* Button text color to match title */
+}
+
+/* About.css or App.css */
+
+.about-container {
+  background-color: #fff; /* Clean white background for contrast */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.about-title {
+  text-align: center;
+  font-weight: bold;
+  color: rgb(197, 21, 21); /* Title color to match navbar */
+}
+
+h4, h5 {
+  margin-bottom: 20px;
+  color: #1abc9c; /* A nice complementary color */
+}
+
+.about-text {
+  color: #34495e; /* Subtle dark text for readability */
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #34495e; /* Consistent text color for paragraphs */
+}
